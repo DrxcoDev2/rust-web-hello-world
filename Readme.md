@@ -33,6 +33,12 @@ make run
 make clean
 ```
 
+## Generate Template
+```bash
+chmod +x rust-template.sh
+./rust-template.sh
+```
+
 ## Bugs
 
 **Unresolved**
