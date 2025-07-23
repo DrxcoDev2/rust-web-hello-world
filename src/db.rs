@@ -1,14 +1,7 @@
-use sea_orm::{Database, DbConn};
-use std::env;
-use dotenvy::dotenv;
+use sea_orm::{Database, DatabaseConnection};
 
-/// Inicializa y retorna una conexión a la base de datos.
-pub async fn init_db() -> DbConn {
-    dotenv().ok(); // Cargar variables desde .env
-
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL no encontrada en .env");
-
+pub async fn establish_connection() -> DatabaseConnection {
+    let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL no encontrada");
     Database::connect(&database_url)
         .await
         .expect("Error al conectar con la base de datos")
