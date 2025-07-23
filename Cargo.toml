@@ -4,7 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-actix-web = "4.11.0"
-actix-web-httpauth = "0.8.2"
-actix-files = "0.6.0"
-tera = "1.20.0"
+actix-web = "4"
+actix-files = "0.6"
+tera = "1.19"
+sea-orm = { version = "0.12", features = ["sqlx-postgres", "runtime-actix-native-tls"] }
+dotenvy = "0.15"        # Para cargar .env con la conexión a DB
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+
