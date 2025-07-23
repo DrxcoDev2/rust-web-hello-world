@@ -14,6 +14,7 @@ Simple web in RUST that uses Actix-web and Tera to render HTML templates.
 ```bash
 git clone https://github.com/DrxcoDev2/rust-web-hello-world.git
 ```
+**Make a `.env`file**
 
 **Build the project**
 
