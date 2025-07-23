@@ -35,7 +35,9 @@ make clean
 
 ## Bugs
 
-- 
+**Unresolved**
+
+- [Issue #1](https://github.com/DrxcoDev2/rust-web-hello-world/issues/1)
 
 ## License
 
