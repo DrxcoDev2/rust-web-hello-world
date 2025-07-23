@@ -11,11 +11,20 @@ mod handlers;
 use handlers::{create_user, NewUser};
 
 async fn index(tera: web::Data<Tera>) -> impl Responder {
+    // En modo dev recarga plantillas en cada petición
+    let mut tera = tera.get_ref().clone();
+    if let Err(e) = tera.full_reload() {
+        eprintln!("Error recargando plantillas: {}", e);
+        return HttpResponse::InternalServerError().body("Error al recargar plantillas");
+    }
+
     let mut ctx = Context::new();
     ctx.insert("title", "Mi Web en Vivo");
-    ctx.insert("message", "¡Hola con recarga automática!");
+    ctx.insert("message", "Aplicacion en NUXT Crud");
 
-    match tera.render("index.html.tera", &ctx) {
+
+
+    match tera.render("index.hbs", &ctx) {
         Ok(html) => HttpResponse::Ok().content_type("text/html").body(html),
         Err(err) => {
             eprintln!("Error al renderizar plantilla: {}", err);
@@ -23,6 +32,7 @@ async fn index(tera: web::Data<Tera>) -> impl Responder {
         }
     }
 }
+
 
 async fn list_users(db: web::Data<DatabaseConnection>) -> impl Responder {
     match users::Entity::find().all(db.get_ref()).await {
@@ -48,7 +58,7 @@ async fn main() -> std::io::Result<()> {
             .route("/users", web::post().to(create_user)) // <-- añadir usuario
             .service(Files::new("/static", "./static").show_files_listing())
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("127.0.0.1", std::env::var("PORT").unwrap_or("8080".to_string()).parse().unwrap()))?
     .run()
     .await
 }

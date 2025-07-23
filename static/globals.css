@@ -3,6 +3,8 @@
     --bg-light: #f4f4f4;
     --text-dark: #333;
     --text-light: #fff;
+
+    --rounded-lg: 16px;
 }
 
 body {
@@ -10,3 +12,10 @@ body {
     color: var(--text-light);
     padding: 2em;   
 }
+
+input[type="text"], button {
+    padding: 0.5rem;
+    border-radius: var(--rounded-lg);
+}
+
+

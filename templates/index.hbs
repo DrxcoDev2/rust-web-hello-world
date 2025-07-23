@@ -12,23 +12,28 @@
     <h1 class="text-2xl font-bold mb-4">{{ message }}</h1>
 
     <!-- Formulario para añadir usuarios -->
-    <form id="userForm" class="space-y-4 bg-gray-900 p-4 rounded w-full max-w-md">
+    <form id="userForm" class="space-y-4 bg-neutral-800 p-6 rounded w-full max-w-md">
         <div>
             <label for="username" class="block">Username</label>
-            <input type="text" id="username" name="username" class="w-full p-2 border" required>
+            <input type="text" id="username" name="username" class="w-full p-2 border border-neutral-600 rounded-md" required>
         </div>
         <div>
             <label for="email" class="block">Email</label>
-            <input type="email" id="email" name="email" class="w-full p-2 border" required>
+            <input type="email" id="email" name="email" class="w-full p-2 border border-neutral-600 rounded-md" required>
         </div>
         <div>
             <label for="password" class="block">Password</label>
-            <input type="password" id="password" name="password" class="w-full p-2 border" required>
+            <input type="password" id="password" name="password" class="w-full p-2 border border-neutral-600 rounded-md" required>
         </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Crear usuario</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-sm">Crear usuario</button>
     </form>
 
     <p id="result" class="mt-4 text-green-700 font-semibold"></p>
+
+    <div id="usersList" class="mt-4">
+        <h2>Lista de usuarios</h2>
+        <ul id="usersListContent" class="mt-2 p-2 border border-neutral-600 rounded-md max-w-md"></ul>
+    </div>
 
     <script>
         document.getElementById("userForm").addEventListener("submit", async function(e) {
@@ -54,6 +59,19 @@
             } else {
                 result.textContent = "❌ Error al crear el usuario";
             }
+        });
+
+        // Cargar la lista de usuarios al cargar la página
+        document.addEventListener("DOMContentLoaded", async function() {
+            const response = await fetch("/users");
+            const users = await response.json();
+            const usersListContent = document.getElementById("usersListContent");
+            usersListContent.innerHTML = "";
+            users.forEach(user => {
+                const li = document.createElement("li");
+                li.textContent = user.username;
+                usersListContent.appendChild(li);
+            });
         });
     </script>
 
