@@ -1,0 +1,12 @@
+:root {
+    --bg-dark: #1e1e1e;
+    --bg-light: #f4f4f4;
+    --text-dark: #333;
+    --text-light: #fff;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 2em;   
+}
