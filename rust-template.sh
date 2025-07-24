@@ -42,6 +42,16 @@ while [ -z "$input" ]; do
     cd $input
 done
 
+input2=""
+while [ -z "$input2" ]; do
+    read -p "Ingrese el nombre del archivo de entorno: " input2
+    if [ -z "$input2" ]; then
+        error "El nombre del archivo de entorno no puede estar vacio."
+    fi
+    touch .env
+    echo "Archivo de entorno creado correctamente"
+done
+
 
 
 

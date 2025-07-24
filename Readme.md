@@ -40,6 +40,14 @@ chmod +x rust-template.sh
 ./rust-template.sh
 ```
 
+## Env variables
+
+```bash python
+# DATABASE_URL="postgres://postgres:postgres@localhost:5432/postgres"
+# PORT=8080
+
+```
+
 ## Bugs
 
 **Unresolved**
